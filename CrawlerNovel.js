@@ -4,22 +4,21 @@ const cheerio = require('cheerio');
 const iconv = require('iconv-lite');
 
 const Novel = {
-  'title': '混元剑帝',
-  'url': 'http://www.bequge.com/7_7559/',
+  'title': '最强的系统',
+  'url': 'http://www.bequge.com/5_5224/',
   'Host': 'www.bequge.com',
   'list': [],
-  'textPath': './txt'
+  'textPath': './txt',
+  'page': 0, //从第几页开始计算时要包括最近章节
 }
-
-let page = 0;
 
 function promiseGetContext(){
   let promise = new Promise((resolve, reject) => {
-    GetContext(Novel.list[page], resolve);
+    GetContext(Novel.list[Novel.Novel.page], resolve);
   })
   .then(function(){
-    page += 1;
-    if(page <= Novel.list.length){
+    Novel.page += 1;
+    if(Novel.page <= Novel.list.length){
       promiseGetContext();
     }
     else{
